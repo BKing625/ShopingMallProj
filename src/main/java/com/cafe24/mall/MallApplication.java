@@ -1,13 +1,13 @@
-package com.cafe24.mallproject;
+package com.cafe24.mall;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MallprojectApplication {
+public class MallApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MallprojectApplication.class, args);
+        SpringApplication.run(MallApplication.class, args);
     }
 
 }
