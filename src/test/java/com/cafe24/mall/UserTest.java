@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static junit.framework.TestCase.assertNotNull;
+import static org.assertj.core.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {UserService.class})
@@ -16,6 +17,11 @@ public class UserTest {
 
     @Autowired
     UserService userService;
+
+    @Test
+    public void userServiceDI(){
+        assertNotNull(userService);
+    }
 
     @Test
     public void idDuplicateCheck(){
@@ -26,5 +32,6 @@ public class UserTest {
 
         assertThat(JsonResult.success(false))
                 .isEqualTo(userService.existEmail("dupEmail"));
+
     }
 }
