@@ -9,11 +9,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.*;
 
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {HelloService.class})
 public class HelloTest {
-
 
     @Autowired
     HelloService helloService;
@@ -24,3 +22,4 @@ public class HelloTest {
         assertThat(helloService.getHelloMessage()).isEqualTo(expected);
     }
 }
+
