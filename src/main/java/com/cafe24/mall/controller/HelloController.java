@@ -11,7 +11,7 @@ public class HelloController {
     @Autowired
     HelloService helloService;
 
-    @GetMapping
+    @GetMapping("/")
     public String hello() {
         return helloService.getHelloMessage();
     }
