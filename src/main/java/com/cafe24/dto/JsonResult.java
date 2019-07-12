@@ -29,4 +29,10 @@ public class JsonResult {
     public Object getData() {
         return data;
     }
+
+    // TODO : override equals
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }
