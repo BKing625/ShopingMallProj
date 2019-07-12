@@ -1,25 +1,23 @@
 package com.cafe24.mall.controller;
 
-import java.util.List;
-
+import com.cafe24.dto.JsonResult;
 import com.cafe24.mall.service.UserService;
 import com.cafe24.mall.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 // TODO : add mappings, implement methods
 @Controller
 @RequestMapping("/users")
 public class UserController {
 
+    private  final  UserService  userService;
+
     @Autowired
-    private UserService userService;
+    public  UserController(UserService  userService){
+        this.userService = userService;
+    }
 
     @GetMapping("/")
     public String viewUserList(){
@@ -28,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping("/new")
-    public String signUpForm(@ModelAttribute UserVo userVo) {
+    public String signUpForm() {
         // TODO : implementation
         return "user/joinForm";
     }
@@ -41,12 +39,18 @@ public class UserController {
 
     @PostMapping("/login")
     public String signIn(){
-        // TODO : implementation
+        // TODO : move to security & implementation
+        return null;
+    }
+
+    @GetMapping("/logout")
+    public String logout(){
+        // TODO : move to security & implementation
         return null;
     }
 
     @PostMapping("/")
-    public String addUser(){
+    public String joinUser(@ModelAttribute UserVo userVo){
         // TODO : implementation
         return null;
     }
@@ -69,5 +73,10 @@ public class UserController {
         return null;
     }
 
-
+    // API
+    @ResponseBody
+    @GetMapping("/api/idcheck")
+    public JsonResult idCheck(@ModelAttribute String idStr){
+        return userService.existId(idStr);
+    }
 }
