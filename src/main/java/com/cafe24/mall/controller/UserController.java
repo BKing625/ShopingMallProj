@@ -9,42 +9,65 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+// TODO : add mappings, implement methods
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
+
     @Autowired
     private UserService userService;
 
-
-    // TODO : add mappings, implement methods
-
-    @RequestMapping(value = "/join", method = RequestMethod.GET)
-    public String join(@ModelAttribute UserVo userVo) {
-
-        return "user/join";
+    @GetMapping("/")
+    public String viewUserList(){
+        // TODO : implementation, admin permission
+        return null;
     }
 
-    @RequestMapping(value = "/join", method = RequestMethod.POST)
-    public String join(@ModelAttribute @Valid UserVo userVo
-            , BindingResult result
-            , Model model) {
-        //System.out.println(userVo);
-
-        if(result.hasErrors()) {
-            List<ObjectError> errors=result.getAllErrors();
-            for(ObjectError error : errors)
-                System.out.println(error.toString());
-            model.addAllAttributes(result.getModel());
-            return "user/join";
-        }
-
-        //userService.join(userVo);
-        return "redirect:/user/joinsuccess";
+    @GetMapping("/new")
+    public String signUpForm(@ModelAttribute UserVo userVo) {
+        // TODO : implementation
+        return "user/joinForm";
     }
+
+    @GetMapping("/login")
+    public String signInForm(){
+        // TODO : implementation
+        return null;
+    }
+
+    @PostMapping("/login")
+    public String signIn(){
+        // TODO : implementation
+        return null;
+    }
+
+    @PostMapping("/")
+    public String addUser(){
+        // TODO : implementation
+        return null;
+    }
+
+    @GetMapping("/{idNo}/modify")
+    public String modifyUserForm(@PathVariable(value="idNo") Long id){
+        // TODO : implementation, permission check
+        return null;
+    }
+
+    @PutMapping("/{idNo}")
+    public String modifyUser(@PathVariable(value="idNo") Long id){
+        // TODO : implementation, permission check
+        return null;
+    }
+
+    @DeleteMapping("/{idNo}")
+    public String deleteUser(@PathVariable(value="idNo") Long id){
+        // TODO : implementation, permission check
+        return null;
+    }
+
+
 }
