@@ -77,6 +77,7 @@ public class UserController {
     @ResponseBody
     @GetMapping("/api/idcheck")
     public JsonResult idCheck(@ModelAttribute String idStr){
-        return userService.existId(idStr);
+
+        return JsonResult.success(userService.existId(idStr));
     }
 }

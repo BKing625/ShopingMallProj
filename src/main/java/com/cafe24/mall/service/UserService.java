@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    public JsonResult existId(String emailAddress){
+    public Boolean existId(String emailAddress){
         // TODO : implementation
-        return JsonResult.success(true);
+        return true;
     }
 }
