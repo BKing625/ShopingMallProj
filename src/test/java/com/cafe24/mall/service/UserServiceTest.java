@@ -1,6 +1,7 @@
 package com.cafe24.mall.service;
 
 import com.cafe24.dto.JsonResult;
+import com.cafe24.mall.vo.UserVo;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,10 +34,13 @@ public class UserServiceTest {
         // TODO : implement test
     }
 
-    @Ignore
+
     @Test
     public void testAddUser(){
         // TODO : implement test
+        UserVo testVo = new UserVo();
+        testVo.setUserNumber(111L);
+        userService.add(testVo);
     }
 
     @Ignore
@@ -47,13 +51,25 @@ public class UserServiceTest {
 
     @Ignore
     @Test
-    public void testDeleteUser(){
-        // TODO : implement test
+    public void testDelete(){
+        UserVo testVo = new UserVo();
+        testVo.setUserNumber(111L);
+        userService.delete(testVo);
+        assertTrue(false);
     }
 
+    @Ignore
+    @Test
+    public void testGetListTest(){
+
+
+        assertTrue(false);
+    }
+
+    @Ignore
     @Test
     public void testExistId(){
-        assertTrue(userService.existId("uniqueEmail"));
+        assertTrue(userService.existId("uniqueId"));
 //
 //        assertThat(JsonResult.success(false))
 //                .isEqualTo(userService.existId("dupEmail"));
