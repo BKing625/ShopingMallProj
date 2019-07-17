@@ -1,5 +1,7 @@
 package com.cafe24.dto;
 
+import java.util.Objects;
+
 public class JsonResult {
     private String result;
     private String message;
@@ -30,9 +32,18 @@ public class JsonResult {
         return data;
     }
 
-    // TODO : override equals
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        JsonResult that = (JsonResult) o;
+        return Objects.equals(result, that.result) &&
+                Objects.equals(message, that.message) &&
+                Objects.equals(data, that.data);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(result, message, data);
     }
 }
