@@ -8,7 +8,6 @@ public class UserVo {
     private String userId;
     private String userPassword;
     private String userJoinDate;
-    private Integer userAge;
     private UserGender userGender;
     private Integer userTall;
     private String userBirth;
@@ -24,7 +23,6 @@ public class UserVo {
                 ", userId='" + userId + '\'' +
                 ", userPassword='" + userPassword + '\'' +
                 ", userJoinDate='" + userJoinDate + '\'' +
-                ", userAge=" + userAge +
                 ", userGender=" + userGender +
                 ", userTall=" + userTall +
                 ", userBirth='" + userBirth + '\'' +
@@ -72,14 +70,6 @@ public class UserVo {
 
     public void setUserJoinDate(String userJoinDate) {
         this.userJoinDate = userJoinDate;
-    }
-
-    public Integer getUserAge() {
-        return userAge;
-    }
-
-    public void setUserAge(Integer userAge) {
-        this.userAge = userAge;
     }
 
     public UserGender getUserGender() {

@@ -1,6 +1,6 @@
 
 application.properties
-
+**/mybatis/mapper/**
 
 HELP.md
 target/

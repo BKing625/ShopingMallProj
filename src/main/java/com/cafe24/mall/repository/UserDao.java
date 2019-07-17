@@ -15,6 +15,13 @@ public class UserDao {
     }
 
     public Integer registry(UserVo userVo) {
-        return sqlSession.insert("user.register", userVo);
+        // TODO : exception processing
+        try {
+            return sqlSession.insert("user.registry", userVo);
+        }
+        catch (Exception e){
+            e.fillInStackTrace();
+            return 0;
+        }
     }
 }

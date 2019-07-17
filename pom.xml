@@ -42,7 +42,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- assertj -->
+        <!-- assert j -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
