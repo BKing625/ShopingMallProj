@@ -1,5 +1,7 @@
 package com.cafe24.mall.vo;
 
+import java.util.Objects;
+
 public class UserVo {
     public enum UserGender {FEMALE, MALE};
     // TODO : add validator
@@ -70,6 +72,29 @@ public class UserVo {
 
     public void setUserJoinDate(String userJoinDate) {
         this.userJoinDate = userJoinDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserVo userVo = (UserVo) o;
+        return Objects.equals(userNumber, userVo.userNumber) &&
+                Objects.equals(userName, userVo.userName) &&
+                Objects.equals(userId, userVo.userId) &&
+                Objects.equals(userPassword, userVo.userPassword) &&
+                Objects.equals(userJoinDate, userVo.userJoinDate) &&
+                userGender == userVo.userGender &&
+                Objects.equals(userTall, userVo.userTall) &&
+                Objects.equals(userBirth, userVo.userBirth) &&
+                Objects.equals(userPostNumber, userVo.userPostNumber) &&
+                Objects.equals(userAddr, userVo.userAddr) &&
+                Objects.equals(userPhone, userVo.userPhone);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userNumber, userName, userId, userPassword, userJoinDate, userGender, userTall, userBirth, userPostNumber, userAddr, userPhone);
     }
 
     public UserGender getUserGender() {

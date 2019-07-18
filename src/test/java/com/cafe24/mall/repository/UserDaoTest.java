@@ -3,6 +3,7 @@ package com.cafe24.mall.repository;
 import com.cafe24.mall.MallApplication;
 import com.cafe24.mall.vo.UserVo;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,16 +53,49 @@ public class UserDaoTest {
 
     @Test
     public void testGetByUserNumber(){
+        UserVo testUserVo = new UserVo();
+        testUserVo.setUserName("안뇽");
+        testUserVo.setUserId("select@test.com");
+        testUserVo.setUserPassword("1234");
+        userDao.registry(testUserVo);
 
+        UserVo getUserVo = userDao.getByUserNumber(testUserVo.getUserNumber());
+
+        // TODO : set written date into input vo
+        getUserVo.setUserJoinDate(null);
+        assertEquals(testUserVo, getUserVo);
     }
 
     @Test
     public void testGetByUserId(){
+        UserVo testUserVo = new UserVo();
+        testUserVo.setUserName("안뇽");
+        testUserVo.setUserId("selectid@test.com");
+        testUserVo.setUserPassword("1234");
+        userDao.registry(testUserVo);
 
+        UserVo getUserVo = userDao.getByUserId("selectid@test.com");
+
+        // TODO : set written date into input vo
+        getUserVo.setUserJoinDate(null);
+        assertEquals(testUserVo, getUserVo);
     }
 
     @Test
     public void testGetByUserIdAndPwd(){
+        UserVo testUserVo = new UserVo();
+        testUserVo.setUserName("안뇽");
+        testUserVo.setUserId("selectidpwd@test.com");
+        testUserVo.setUserPassword("1234");
+        userDao.registry(testUserVo);
 
+        UserVo getUserVo = userDao.getByUserIdAndPwd("selectidpwd@test.com","1234");
+
+        // TODO : set written date into input vo
+        getUserVo.setUserJoinDate(null);
+        assertEquals(testUserVo, getUserVo);
+
+        UserVo falsePwdUserVo = userDao.getByUserIdAndPwd("selectidpwd@test.com","1");
+        assertNull(falsePwdUserVo);
     }
 }
