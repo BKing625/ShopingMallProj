@@ -2,6 +2,7 @@ package com.cafe24.mall.repository;
 
 import com.cafe24.mall.MallApplication;
 import com.cafe24.mall.vo.UserVo;
+import io.swagger.models.auth.In;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -52,6 +53,27 @@ public class UserDaoTest {
     }
 
     @Test
+    public void testGetList(){
+        UserVo testUserVo = new UserVo();
+        testUserVo.setUserName("안뇽");
+        testUserVo.setUserId("getlist@test.com");
+        testUserVo.setUserPassword("1234");
+        userDao.registry(testUserVo);
+
+        UserVo testUserVo2 = new UserVo();
+        testUserVo2.setUserName("안뇽");
+        testUserVo2.setUserId("getlist2@test.com");
+        testUserVo2.setUserPassword("1234");
+        userDao.registry(testUserVo2);
+        List<UserVo> gotVos = userDao.getList(1);
+//        for (UserVo gotVo:gotVos
+//             ) {
+//            System.out.println(gotVo);
+//        }
+        assertTrue(gotVos.size()>1);
+    }
+
+    @Test
     public void testGetByUserNumber(){
         UserVo testUserVo = new UserVo();
         testUserVo.setUserName("안뇽");
@@ -97,5 +119,60 @@ public class UserDaoTest {
 
         UserVo falsePwdUserVo = userDao.getByUserIdAndPwd("selectidpwd@test.com","1");
         assertNull(falsePwdUserVo);
+    }
+
+    @Test
+    public void testGet(){
+        UserVo testUserVo = new UserVo();
+        testUserVo.setUserName("안뇽");
+        testUserVo.setUserId("get@test.com");
+        testUserVo.setUserPassword("1234");
+        userDao.registry(testUserVo);
+
+        UserVo userNumVo = new UserVo();
+        userNumVo.setUserNumber(testUserVo.getUserNumber());
+        UserVo userIdVo = new UserVo();
+        userIdVo.setUserId("get@test.com");
+        UserVo userIdAndPwdVo = new UserVo();
+        userIdAndPwdVo.setUserId("get@test.com");
+        userIdAndPwdVo.setUserPassword("1234");
+        UserVo userNumAndIdVo= new UserVo();
+        userNumAndIdVo.setUserNumber(testUserVo.getUserNumber());
+        userNumAndIdVo.setUserId("get@test.com");
+        UserVo onlyPwdVo = new UserVo();
+        onlyPwdVo.setUserPassword("1234");
+
+        assertNotNull(userDao.get(userNumVo));
+        assertNotNull(userDao.get(userIdVo));
+        assertNotNull(userDao.get(userIdAndPwdVo));
+        assertNotNull(userDao.get(userNumAndIdVo));
+        assertNull(userDao.get(onlyPwdVo));
+    }
+
+    @Test
+    public void testDelete(){
+        UserVo testUserVo = new UserVo();
+        testUserVo.setUserName("안뇽");
+        testUserVo.setUserId("delete@test.com");
+        testUserVo.setUserPassword("1234");
+        userDao.registry(testUserVo);
+
+        testUserVo.setUserPassword(null);
+        assertEquals((Integer)0, userDao.delete(testUserVo));
+        testUserVo.setUserPassword("1234");
+        assertEquals((Integer)1, userDao.delete(testUserVo));
+    }
+
+    @Test
+    public void testUpdate(){
+        UserVo testUserVo = new UserVo();
+        testUserVo.setUserName("안뇽");
+        testUserVo.setUserId("update@test.com");
+        testUserVo.setUserPassword("1234");
+        userDao.registry(testUserVo);
+
+        testUserVo.setUserGender(UserVo.UserGender.MALE);
+        userDao.update(testUserVo);
+        assertTrue(testUserVo.equalsWithOutJoinDate(userDao.getByUserId(testUserVo.getUserId())));
     }
 }

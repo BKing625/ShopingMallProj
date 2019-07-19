@@ -91,7 +91,21 @@ public class UserVo {
                 Objects.equals(userAddr, userVo.userAddr) &&
                 Objects.equals(userPhone, userVo.userPhone);
     }
-
+    public boolean equalsWithOutJoinDate(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserVo userVo = (UserVo) o;
+        return Objects.equals(userNumber, userVo.userNumber) &&
+                Objects.equals(userName, userVo.userName) &&
+                Objects.equals(userId, userVo.userId) &&
+                Objects.equals(userPassword, userVo.userPassword) &&
+                userGender == userVo.userGender &&
+                Objects.equals(userTall, userVo.userTall) &&
+                Objects.equals(userBirth, userVo.userBirth) &&
+                Objects.equals(userPostNumber, userVo.userPostNumber) &&
+                Objects.equals(userAddr, userVo.userAddr) &&
+                Objects.equals(userPhone, userVo.userPhone);
+    }
     @Override
     public int hashCode() {
         return Objects.hash(userNumber, userName, userId, userPassword, userJoinDate, userGender, userTall, userBirth, userPostNumber, userAddr, userPhone);

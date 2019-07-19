@@ -18,7 +18,7 @@ public class UserService {
     }
 
     public Boolean modify(UserVo userVo){
-        return null;
+        return (1 == userDao.update(userVo));
     }
 
     // TODO : encryption
@@ -27,7 +27,7 @@ public class UserService {
     }
 
     public Boolean delete(UserVo userVo){
-        return null;
+        return (userDao.delete(userVo) == 1);
     }
 
     public UserVo login(UserVo userVo){
@@ -39,12 +39,12 @@ public class UserService {
     }
 
     public List<UserVo> getList(int page){
-        return null;
+        return userDao.getList(page);
     }
 
-    // TODO : test
-    public UserVo getUserInfo(UserVo conditionVo){
-        if(conditionVo.getUserNumber() == null && conditionVo.getUserId() == null) return null;
+    public UserVo getInfo(UserVo conditionVo){
+        if(conditionVo == null)return null;
+        if (conditionVo.getUserNumber() == null && conditionVo.getUserId() == null) return null;
         return userDao.get(conditionVo);
     }
 
