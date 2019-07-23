@@ -12,7 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {MallApplication.class})
+@SpringBootTest(properties = "classpath:application.properties")
+//@SpringBootTest(classes = {MallApplication.class})
 @Transactional
 public class UserServiceTest {
 

@@ -1,10 +1,7 @@
 package com.cafe24.mall.repository;
 
-import com.cafe24.mall.MallApplication;
 import com.cafe24.mall.vo.UserVo;
-import io.swagger.models.auth.In;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +16,7 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes= MallApplication.class)
+@SpringBootTest(properties = "classpath:application.properties")//classes= MallApplication.class)
 @Transactional
 public class UserDaoTest {
 

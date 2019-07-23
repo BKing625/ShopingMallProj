@@ -56,8 +56,7 @@ public class UserDao {
     }
 
     public Integer delete(UserVo userVo) {
-        if (userVo.getUserNumber() == null ||
-            userVo.getUserId() == null)
+        if (userVo.getUserNumber() == null)
             return 0;
         return sqlSession.delete("user.delete", userVo);
     }

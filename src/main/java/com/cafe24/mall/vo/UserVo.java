@@ -1,14 +1,26 @@
 package com.cafe24.mall.vo;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
 public class UserVo {
     public enum UserGender {FEMALE, MALE};
     // TODO : add validator
+
     private Long userNumber;
+
+    @NotEmpty
     private String userName;
+
+    @NotEmpty//(message = "ID")
+    @Email
     private String userId;
+
+    @NotEmpty(message = "pwd must not be empty")
+    //TODO : add pwd regex
     private String userPassword;
+
     private String userJoinDate;
     private UserGender userGender;
     private Integer userTall;
