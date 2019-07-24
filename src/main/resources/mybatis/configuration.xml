@@ -3,9 +3,11 @@
 <configuration>
     <typeAliases>
         <typeAlias alias="uservo" type ="com.cafe24.mall.vo.UserVo" />
+        <typeAlias alias="optionvo" type ="com.cafe24.mall.vo.OptionVo" />
     </typeAliases>
 
     <mappers>
         <mapper resource="mybatis/mapper/user.xml" />
+        <mapper resource="mybatis/mapper/option.xml" />
     </mappers>
 </configuration>
