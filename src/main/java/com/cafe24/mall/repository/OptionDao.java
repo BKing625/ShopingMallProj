@@ -17,7 +17,7 @@ public class OptionDao {
     public Integer registry(OptionVo optionVo) {
         // TODO : exception processing
         try {
-            return sqlSession.insert("option.registry", optionVo);
+            return sqlSession.insert("product.registry", optionVo);
         }
         catch (Exception e){
             e.fillInStackTrace();
