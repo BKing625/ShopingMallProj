@@ -17,10 +17,10 @@ public class OptionDao {
     public Integer registry(OptionVo optionVo) {
         // TODO : exception processing
         try {
-            return sqlSession.insert("product.registry", optionVo);
+            return sqlSession.insert("option.registry", optionVo);
         }
         catch (Exception e){
-            e.fillInStackTrace();
+            e.printStackTrace();
             return 0;
         }
     }

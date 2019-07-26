@@ -11,6 +11,20 @@ public class OptionVo {
 
     private List<OptionVo> subOptions;
 
+    public List<OptionVo> getSubOptions() {
+        return subOptions;
+    }
+
+    public void setSubOptions(List<OptionVo> subOptions) {
+        this.subOptions = subOptions;
+    }
+
+    public void addChildren(OptionVo childVo){
+        if(subOptions == null)
+            subOptions = new ArrayList<>();
+        subOptions.add(childVo);
+    }
+
     @Override
     public String toString() {
         return "OptionVo{" +

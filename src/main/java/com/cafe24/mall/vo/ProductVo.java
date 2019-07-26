@@ -1,5 +1,7 @@
 package com.cafe24.mall.vo;
 
+import javax.validation.constraints.NotEmpty;
+import java.util.List;
 import java.util.Objects;
 
 public class ProductVo {
@@ -8,9 +10,21 @@ public class ProductVo {
     }
 
 
+    public List<OptionVo> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<OptionVo> options) {
+        this.options = options;
+    }
+
+    private List<OptionVo> options;
     private Long productNumber;
+    @NotEmpty
     private String productName;
     private String productTitle;
+
+    // TODO: 2019-07-27 add validator 
     private StockType productStockType;
 
     public Long getProductNumber() {

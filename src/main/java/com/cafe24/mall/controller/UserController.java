@@ -77,7 +77,6 @@ public class UserController {
                         .body(JsonResult.fail(error.getDefaultMessage()));
             }
         }
-        System.out.println(userVo);
 
         ResponseEntity<JsonResult> res;
 
