@@ -22,7 +22,7 @@ public class UserDao {
             return sqlSession.insert("user.registry", userVo);
         }
         catch (Exception e){
-            e.fillInStackTrace();
+            e.printStackTrace();
             return 0;
         }
     }
@@ -33,7 +33,13 @@ public class UserDao {
     }
 
     public List<UserVo> getList(int page){
-        return sqlSession.selectList("user.getList",page-1);
+        try {
+            return sqlSession.selectList("user.getList", (page - 1) * 15);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public UserVo getByUserNumber(Long userNum){

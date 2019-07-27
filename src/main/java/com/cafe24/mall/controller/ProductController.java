@@ -23,13 +23,12 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/")
-    public String viewProductList(@ModelAttribute List categoryList,
-                                  @ModelAttribute String searchWord){
-        // TODO : implementation
-        return null;
+    @GetMapping("/list/{productPage:[\\d]+}")
+    public JsonResult viewProductList(@PathVariable Integer productPage){
+        return JsonResult.success(productService.getList(productPage));
     }
 
+    @Deprecated
     @GetMapping("/new")
     public String registerProductForm(){
         // TODO : implementation, add permission
@@ -59,11 +58,13 @@ public class ProductController {
     }
 
     @GetMapping("/{productNo}")
-    public String viewProductDetail(@PathVariable(value="productNo") Long id){
+    public String viewProductDetail(@PathVariable(value="productNo") Long prodNum){
         // TODO : implementation
         return null;
     }
 
+    // move to front
+    @Deprecated
     @GetMapping("/{productNo}/modify")
     public String modifyProductForm(@PathVariable(value="productNo") Long id){
         // TODO : implementation, add permission

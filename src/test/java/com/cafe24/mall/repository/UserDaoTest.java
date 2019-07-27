@@ -63,10 +63,10 @@ public class UserDaoTest {
         testUserVo2.setUserPassword("1234");
         userDao.registry(testUserVo2);
         List<UserVo> gotVos = userDao.getList(1);
-//        for (UserVo gotVo:gotVos
-//             ) {
-//            System.out.println(gotVo);
-//        }
+        for (UserVo gotVo:gotVos
+             ) {
+            System.out.println(gotVo);
+        }
         assertTrue(gotVos.size()>1);
     }
 

@@ -21,7 +21,8 @@ public class ProductServiceTest {
 
     @Autowired
     ProductService productService;
-
+    @Autowired
+    ProductDao productDao;
     @Test
     public void testDI(){
         Assert.assertNotNull(productService);
@@ -48,5 +49,16 @@ public class ProductServiceTest {
         testVo.setOptions(testOptionVo);
 
         Assert.assertTrue(productService.add(testVo));
+    }
+
+    @Test
+    public void testGetUserList(){
+        for (int i = 0; i < 20; i++) {
+            ProductVo testVo = new ProductVo();
+            testVo.setProductName("getListTest" + i);
+            testVo.setProductStockType(ProductVo.StockType.LIMIT);
+            productDao.registry(testVo);
+        }
+        Assert.assertEquals(15, productService.getList(1).size());
     }
 }

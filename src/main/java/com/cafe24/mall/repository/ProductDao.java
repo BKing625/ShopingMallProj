@@ -26,7 +26,7 @@ public class ProductDao {
     }
 
     public List<ProductVo> getList(int page){
-        return sqlSession.selectList("product.getList",page-1);
+        return sqlSession.selectList("product.getList",15*(page-1));
     }
 
     public ProductVo get(Long productId){

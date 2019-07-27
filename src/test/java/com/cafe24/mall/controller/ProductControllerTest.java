@@ -1,5 +1,6 @@
 package com.cafe24.mall.controller;
 
+import com.cafe24.mall.repository.ProductDao;
 import com.cafe24.mall.vo.OptionVo;
 import com.cafe24.mall.vo.ProductVo;
 import com.google.common.collect.TreeTraverser;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.TreeSet;
 
 import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -33,7 +35,8 @@ public class ProductControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-
+    @Autowired
+    private ProductDao productDao;
     @Test
     public void testTemplateDI(){
 
@@ -78,5 +81,21 @@ public class ProductControllerTest {
                 .andExpect(status().isCreated())
                 .andDo(print())
                 .andExpect(jsonPath("$.result", is("success")));
+    }
+
+    @Test
+    @Transactional
+    public void testGetList() throws Exception{
+        for (int i = 0; i < 20; i++) {
+            ProductVo testVo = new ProductVo();
+            testVo.setProductName("getListTest" + i);
+            testVo.setProductStockType(ProductVo.StockType.LIMIT);
+            productDao.registry(testVo);
+        }
+
+        mockMvc.perform(get("/product/list/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.result", is("success")))
+                .andDo(print());
     }
 }

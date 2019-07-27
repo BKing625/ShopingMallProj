@@ -51,4 +51,12 @@ public class ProductService {
         }
         return true;
     }
+
+    public List<ProductVo> getList(){
+        return getList(1);
+    }
+
+    public List<ProductVo> getList(int page){
+        return productDao.getList(page);
+    }
 }
