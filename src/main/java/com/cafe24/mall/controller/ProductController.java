@@ -3,10 +3,8 @@ package com.cafe24.mall.controller;
 import com.cafe24.dto.JsonResult;
 import com.cafe24.mall.service.ProductService;
 import com.cafe24.mall.vo.ProductVo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +34,7 @@ public class ProductController {
     }
 
     @PostMapping("")
-    public ResponseEntity<JsonResult> addProduct(@RequestBody @Valid ProductVo pVo,
+    public ResponseEntity addProduct(@RequestBody @Valid ProductVo pVo,
                                                  BindingResult result){
         // TODO : add permission
         if(result.hasErrors()) {
@@ -48,7 +46,7 @@ public class ProductController {
             }
         }
 
-        ResponseEntity<JsonResult> res;
+        ResponseEntity res;
 
         if(productService.add(pVo))
             res = ResponseEntity.status(HttpStatus.CREATED).body(JsonResult.success(null));
@@ -71,15 +69,20 @@ public class ProductController {
         return null;
     }
 
-    @PutMapping("/{productNo}")
-    public String modifyProduct(@ModelAttribute ProductVo pVo){
+    @PutMapping("/{productNo:[\\d]+}")
+    public String modifyProduct(@ModelAttribute ProductVo productNo){
         // TODO : implementation, permission check
         return null;
     }
 
-    @DeleteMapping("/{productNo}")
-    public String deleteProduct(@PathVariable(value="productNo") Long id){
-        // TODO : implementation, add permission
-        return null;
+    @DeleteMapping("/{productNo:[\\d]+}")
+    public ResponseEntity deleteProduct(@PathVariable Long productNo){
+        // TODO : add permission
+        ResponseEntity res = null;
+        if(productService.delete(productNo))
+            res = ResponseEntity.status(200).body(null);
+        else
+            res = ResponseEntity.status(500).body(null);
+        return res;
     }
 }

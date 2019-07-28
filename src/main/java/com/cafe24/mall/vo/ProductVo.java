@@ -1,6 +1,7 @@
 package com.cafe24.mall.vo;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -79,7 +80,11 @@ public class ProductVo {
                 Objects.equals(productTitle, productVo.productTitle) &&
                 productStockType == productVo.productStockType;
     }
-
+    public void addOption(OptionVo addOption){
+        if(options == null)
+            options = new ArrayList<>();
+        options.add(addOption);
+    }
     @Override
     public int hashCode() {
         return Objects.hash(productNumber, productName, productTitle, productStockType);

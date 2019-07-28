@@ -20,7 +20,7 @@ public class ProductDao {
             return sqlSession.insert("product.registry", productVo);
         }
         catch (Exception e){
-            e.fillInStackTrace();
+            e.printStackTrace();
             return 0;
         }
     }
@@ -33,8 +33,9 @@ public class ProductDao {
         return sqlSession.selectOne("product.get", productId);
     }
 
-    public Integer delete(ProductVo delVo){
-        return sqlSession.delete("product.delete",delVo);
+    public Integer delete(Long productId){
+
+        return sqlSession.delete("product.delete",productId);
     }
 
     public Integer update(ProductVo updateVo) {

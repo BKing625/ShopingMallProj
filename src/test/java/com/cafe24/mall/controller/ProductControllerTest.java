@@ -1,6 +1,8 @@
 package com.cafe24.mall.controller;
 
 import com.cafe24.mall.repository.ProductDao;
+import com.cafe24.mall.service.ProductService;
+import com.cafe24.mall.service.UserService;
 import com.cafe24.mall.vo.OptionVo;
 import com.cafe24.mall.vo.ProductVo;
 import com.google.common.collect.TreeTraverser;
@@ -22,8 +24,7 @@ import java.util.List;
 import java.util.TreeSet;
 
 import static org.hamcrest.Matchers.is;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -37,6 +38,11 @@ public class ProductControllerTest {
 
     @Autowired
     private ProductDao productDao;
+
+    @Autowired
+    private ProductService productService;
+
+
     @Test
     public void testTemplateDI(){
 
@@ -96,6 +102,43 @@ public class ProductControllerTest {
         mockMvc.perform(get("/product/list/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.result", is("success")))
+                .andDo(print());
+    }
+
+    @Test
+    @Transactional
+    public void testDelete() throws Exception{
+        ProductVo testVo = new ProductVo();
+
+        testVo.setProductStockType(ProductVo.StockType.LIMIT);
+        List<OptionVo> testOptionVo = new ArrayList<>();
+
+        OptionVo testOptionVo11 = new OptionVo();
+        testOptionVo11.setOptionDetail("child1");
+        OptionVo testOptionVo12 = new OptionVo();
+        testOptionVo12.setOptionDetail("child2");
+        OptionVo testOptionVo21 = new OptionVo();
+        testOptionVo21.setOptionDetail("1child1");
+        OptionVo testOptionVo22 = new OptionVo();
+        testOptionVo22.setOptionDetail("1child2");
+
+        testOptionVo11.addChildren(testOptionVo21);
+        testOptionVo11.addChildren(testOptionVo22);
+        testOptionVo.add(testOptionVo11);
+        testOptionVo.add(testOptionVo12);
+
+        testVo.setOptions(testOptionVo);
+        testVo.setProductName("delTest");
+        Assert.assertTrue(productService.add(testVo));
+
+        Long testVoNum = testVo.getProductNumber();
+
+        mockMvc.perform(delete("/product/"+testVoNum))
+                .andExpect(status().isOk())
+                .andDo(print());
+
+        mockMvc.perform(delete("/product/"+testVoNum))
+                .andExpect(status().isInternalServerError())
                 .andDo(print());
     }
 }

@@ -52,7 +52,7 @@ public class ProductDaoTest {
         testVo.setProductStockType(ProductVo.StockType.LIMIT);
 
         productDao.registry(testVo);
-        Assert.assertEquals((Integer) 1, productDao.delete(testVo));
+        Assert.assertEquals((Integer) 1, productDao.delete(testVo.getProductNumber()));
         Assert.assertNull(productDao.get(testVo.getProductNumber()));
     }
 
