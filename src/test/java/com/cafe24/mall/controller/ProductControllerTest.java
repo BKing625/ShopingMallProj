@@ -137,4 +137,76 @@ public class ProductControllerTest {
                 .andExpect(status().isInternalServerError())
                 .andDo(print());
     }
+
+    @Test
+    @Transactional
+    public void testGet() throws Exception{
+        ProductVo testVo = new ProductVo();
+
+        testVo.setProductStockType(ProductVo.StockType.LIMIT);
+        List<OptionVo> testOptionVo = new ArrayList<>();
+
+        OptionVo testOptionVo11 = new OptionVo();
+        testOptionVo11.setOptionDetail("child1");
+        OptionVo testOptionVo12 = new OptionVo();
+        testOptionVo12.setOptionDetail("child2");
+        OptionVo testOptionVo21 = new OptionVo();
+        testOptionVo21.setOptionDetail("1child1");
+        OptionVo testOptionVo22 = new OptionVo();
+        testOptionVo22.setOptionDetail("1child2");
+
+        testOptionVo11.addChildren(testOptionVo21);
+        testOptionVo11.addChildren(testOptionVo22);
+        testOptionVo.add(testOptionVo11);
+        testOptionVo.add(testOptionVo12);
+
+        testVo.setOptions(testOptionVo);
+        testVo.setProductName("getTest");
+        Assert.assertTrue(productService.add(testVo));
+
+        Long testVoNum = testVo.getProductNumber();
+
+        mockMvc.perform(get("/product/"+testVoNum))
+                .andExpect(jsonPath("$.result", is("success")))
+                .andDo(print());
+    }
+
+    @Test
+    @Transactional
+    public void testModify() throws Exception{
+        ProductVo testVo = new ProductVo();
+
+        testVo.setProductStockType(ProductVo.StockType.LIMIT);
+        List<OptionVo> testOptionVo = new ArrayList<>();
+
+        OptionVo testOptionVo11 = new OptionVo();
+        testOptionVo11.setOptionDetail("child1");
+        OptionVo testOptionVo12 = new OptionVo();
+        testOptionVo12.setOptionDetail("child2");
+        OptionVo testOptionVo21 = new OptionVo();
+        testOptionVo21.setOptionDetail("1child1");
+        OptionVo testOptionVo22 = new OptionVo();
+        testOptionVo22.setOptionDetail("1child2");
+
+        testOptionVo11.addChildren(testOptionVo21);
+        testOptionVo11.addChildren(testOptionVo22);
+        testOptionVo.add(testOptionVo11);
+        testOptionVo.add(testOptionVo12);
+
+        testVo.setOptions(testOptionVo);
+        testVo.setProductName("modifyTest");
+        Assert.assertTrue(productService.add(testVo));
+
+        Long testVoNum = testVo.getProductNumber();
+        testVo.setProductName("modified");
+        mockMvc.perform(put("/product")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new Gson().toJson(testVo))
+                .characterEncoding("utf-8"))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("$.result", is("success")));
+
+        Assert.assertEquals("modified",productDao.get(testVoNum).getProductName());
+    }
 }

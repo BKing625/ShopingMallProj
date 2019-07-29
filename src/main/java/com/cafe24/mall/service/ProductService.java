@@ -28,7 +28,7 @@ public class ProductService {
             return false;
 
         
-        if(addOptionTree(addVo.getProductNumber(), addVo.getOptions())){
+        if(!addOptionTree(addVo.getProductNumber(), addVo.getOptions())){
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return false;
         }
@@ -58,7 +58,7 @@ public class ProductService {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return false;
         }
-        if(addOptionTree(prodNumber, updateVo.getOptions())){
+        if(!addOptionTree(prodNumber, updateVo.getOptions())){
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return false;
         }
@@ -107,7 +107,7 @@ public class ProductService {
         for(OptionVo op : options){
             hashMap.put(op.getOptionNumber(),op);
             temp = op.getOptionNumber();
-            System.out.println(op);
+//            System.out.println(op);
         }
 
         for(OptionVo op : options){

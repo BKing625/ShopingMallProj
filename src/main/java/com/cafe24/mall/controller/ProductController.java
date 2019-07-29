@@ -56,9 +56,13 @@ public class ProductController {
     }
 
     @GetMapping("/{productNo}")
-    public String viewProductDetail(@PathVariable(value="productNo") Long prodNum){
-        // TODO : implementation
-        return null;
+    public JsonResult viewProductDetail(@PathVariable(value="productNo") Long prodNum){
+        ProductVo resVo = productService.get(prodNum);
+        if(resVo!=null){
+            return JsonResult.success(resVo);
+        } else {
+            return JsonResult.fail("invalid product number");
+        }
     }
 
     // move to front
@@ -69,10 +73,29 @@ public class ProductController {
         return null;
     }
 
-    @PutMapping("/{productNo:[\\d]+}")
-    public String modifyProduct(@ModelAttribute ProductVo productNo){
-        // TODO : implementation, permission check
-        return null;
+    @PutMapping("")
+    public ResponseEntity modifyProduct(@RequestBody @Valid ProductVo prodVo,
+                                                    BindingResult result){
+        // TODO : permission check
+        if(result.hasErrors()) {
+            List<ObjectError> errors=result.getAllErrors();
+            for (ObjectError error : errors) {
+                if ("pwd must not be empty".equals(error.getDefaultMessage())) {
+                    System.out.println(error.toString());
+                    continue;
+                }
+                System.out.println(error.getDefaultMessage());
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(JsonResult.fail(error.getDefaultMessage()));
+            }
+        }
+
+        ResponseEntity res;
+        if(productService.modify(prodVo))
+            res = ResponseEntity.status(200).body(JsonResult.success(null));
+        else
+            res = ResponseEntity.status(500).body(JsonResult.fail("modify fail"));
+        return res;
     }
 
     @DeleteMapping("/{productNo:[\\d]+}")
