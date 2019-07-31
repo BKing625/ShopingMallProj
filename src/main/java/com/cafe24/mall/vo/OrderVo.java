@@ -1,5 +1,7 @@
 package com.cafe24.mall.vo;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class OrderVo {
@@ -13,6 +15,23 @@ public class OrderVo {
     private String ordererPhone;
     private String orderMessage;
     private String orderDate;
+
+
+    private List<OrderDetailsVo> goodsList;
+
+    public void addGoods(OrderDetailsVo addVo){
+        if(goodsList == null)
+            goodsList = new ArrayList<>();
+        goodsList.add(addVo);
+    }
+
+    public List<OrderDetailsVo> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<OrderDetailsVo> goodsList) {
+        this.goodsList = goodsList;
+    }
 
     public Long getOrderNumber() {
         return orderNumber;
@@ -98,6 +117,7 @@ public class OrderVo {
                 ", ordererPhone='" + ordererPhone + '\'' +
                 ", orderMessage='" + orderMessage + '\'' +
                 ", orderDate='" + orderDate + '\'' +
+                ", goodsList=" + goodsList +
                 '}';
     }
 
@@ -119,6 +139,7 @@ public class OrderVo {
                 Objects.equals(ordererName, orderVo.ordererName) &&
                 Objects.equals(ordererPhone, orderVo.ordererPhone) &&
                 Objects.equals(orderMessage, orderVo.orderMessage) &&
-                Objects.equals(orderDate, orderVo.orderDate);
+                Objects.equals(orderDate, orderVo.orderDate) &&
+                Objects.equals(goodsList, orderVo.goodsList);
     }
 }

@@ -24,7 +24,7 @@ public class OrderDetailsDao {
         }
     }
 
-    public List<OrderDetailsDao> getList(Long orderNum){
+    public List<OrderDetailsVo> getList(Long orderNum){
         return sqlSession.selectList("orderdetails.getList", orderNum);
     }
 

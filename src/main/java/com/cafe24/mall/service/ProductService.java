@@ -4,7 +4,6 @@ import com.cafe24.mall.repository.OptionDao;
 import com.cafe24.mall.repository.ProductDao;
 import com.cafe24.mall.vo.OptionVo;
 import com.cafe24.mall.vo.ProductVo;
-import jdk.nashorn.internal.runtime.regexp.joni.encoding.ObjPtr;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
