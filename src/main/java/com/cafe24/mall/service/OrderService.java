@@ -23,7 +23,9 @@ public class OrderService {
 
     @Transactional
     public Boolean add(OrderVo addVo){
-        if(addVo.getGoodsList()==null || 0==orderDao.registry(addVo)) return false;
+        if(addVo.getGoodsList()==null
+                || addVo.getGoodsList().size() == 0
+                || 0 ==orderDao.registry(addVo)) return false;
 
         for(OrderDetailsVo odsVo : addVo.getGoodsList()){
             odsVo.setOrderNumber(addVo.getOrderNumber());
@@ -48,12 +50,12 @@ public class OrderService {
         return orderDao.getList(userNumber, page);
     }
 
-    public OrderVo get(Long prodNum, Long userNum){
-        OrderVo resVo = orderDao.get(prodNum, userNum);
+    public OrderVo get(Long orderNum, Long userNum){
+        OrderVo resVo = orderDao.get(orderNum, userNum);
 
         if(resVo == null) return null;
 
-        resVo.setGoodsList(odsDao.getList(prodNum));
+        resVo.setGoodsList(odsDao.getList(orderNum));
         return resVo;
     }
 
