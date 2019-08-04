@@ -1,13 +1,12 @@
-**/application.properties
-application.properties
-src/main/resources/application.properties
 
-/Users/bking/Workspace/mallproject/src/main/resources/application.properties
+application.properties
+**/mybatis/mapper/**
+
 
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**
+!**/src/main/java/**
 !**/src/test/**
 
 ### STS ###
