@@ -7,6 +7,7 @@
         <typeAlias alias="productvo" type ="com.cafe24.mall.vo.ProductVo" />
         <typeAlias alias="ordervo" type ="com.cafe24.mall.vo.OrderVo" />
         <typeAlias alias="odsvo" type ="com.cafe24.mall.vo.OrderDetailsVo" />
+        <typeAlias alias="bucketvo" type ="com.cafe24.mall.vo.BucketVo" />
     </typeAliases>
 
     <mappers>
@@ -15,5 +16,6 @@
         <mapper resource="mybatis/mapper/product.xml" />
         <mapper resource="mybatis/mapper/order.xml" />
         <mapper resource="mybatis/mapper/orderdetails.xml" />
+        <mapper resource="mybatis/mapper/bucket.xml" />
     </mappers>
 </configuration>
