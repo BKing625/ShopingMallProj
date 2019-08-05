@@ -33,6 +33,7 @@ public class ProductController {
         return null;
     }
 
+
     @PostMapping("")
     public ResponseEntity addProduct(@RequestBody @Valid ProductVo pVo,
                                                  BindingResult result){
@@ -67,12 +68,6 @@ public class ProductController {
 
     // move to front
     @Deprecated
-    @GetMapping("/{productNo}/modify")
-    public String modifyProductForm(@PathVariable(value="productNo") Long id){
-        // TODO : implementation, add permission
-        return null;
-    }
-
     @PutMapping("")
     public ResponseEntity modifyProduct(@RequestBody @Valid ProductVo prodVo,
                                                     BindingResult result){
@@ -101,11 +96,12 @@ public class ProductController {
     @DeleteMapping("/{productNo:[\\d]+}")
     public ResponseEntity deleteProduct(@PathVariable Long productNo){
         // TODO : add permission
-        ResponseEntity res = null;
+        ResponseEntity res;
         if(productService.delete(productNo))
             res = ResponseEntity.status(200).body(null);
         else
             res = ResponseEntity.status(500).body(null);
         return res;
+
     }
 }

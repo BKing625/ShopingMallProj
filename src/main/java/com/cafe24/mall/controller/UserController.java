@@ -4,6 +4,7 @@ import com.cafe24.dto.JsonResult;
 import com.cafe24.mall.service.UserService;
 import com.cafe24.mall.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,7 @@ public class UserController {
         this.userService = userService;
     }
 
+
     @GetMapping("/list/{userPage:[\\d]+}")
     public JsonResult getUserList(@PathVariable Integer userPage){
         // TODO : admin permission
@@ -42,6 +44,7 @@ public class UserController {
         // TODO : implementation
         return "user/joinForm";
     }
+
 
     // move to front
     @Deprecated
@@ -57,6 +60,7 @@ public class UserController {
         return null;
     }
 
+
     // move to security
     @Deprecated
     @GetMapping("/logout")
@@ -64,6 +68,7 @@ public class UserController {
         // TODO : move to security & implementation
         return null;
     }
+
 
 
     @PostMapping("")
@@ -77,10 +82,6 @@ public class UserController {
                         .body(JsonResult.fail(error.getDefaultMessage()));
             }
         }
-<<<<<<< HEAD
-        System.out.println(userVo);
-=======
->>>>>>> working-feature
 
         ResponseEntity<JsonResult> res;
 

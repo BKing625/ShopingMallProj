@@ -51,7 +51,7 @@ public class BucketController {
         return res;
     }
 
-    @DeleteMapping("/{{bucketNo:[\\d]+}")
+    @DeleteMapping("/{bucketNo:[\\d]+}")
     public ResponseEntity delete(@PathVariable Long bucketNo) {
         ResponseEntity res = null;
         if(bucketService.delete(bucketNo))
