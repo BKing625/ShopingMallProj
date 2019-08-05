@@ -1,5 +1,6 @@
 package com.cafe24.mall.service;
 
+
 import com.cafe24.mall.repository.UserDao;
 import com.cafe24.mall.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import java.util.List;
 public class UserService {
 
 
+
     private final UserDao userDao;
     @Autowired
     public UserService(UserDao userDao) {
@@ -19,15 +21,18 @@ public class UserService {
 
     public Boolean modify(UserVo userVo){
         return (1 == userDao.update(userVo));
+
     }
 
     // TODO : encryption
     public Boolean add(UserVo userVo){
+
         return userDao.registry(userVo) == 1;
     }
 
     public Boolean delete(UserVo userVo){
         return (userDao.delete(userVo) == 1);
+
     }
 
     public UserVo login(UserVo userVo){
@@ -39,6 +44,7 @@ public class UserService {
     }
 
     public List<UserVo> getList(int page){
+
         return userDao.getList(page);
     }
 
@@ -54,5 +60,6 @@ public class UserService {
 
     public Boolean existId(String userId){
         return userDao.getByUserId(userId) != null;
+
     }
 }

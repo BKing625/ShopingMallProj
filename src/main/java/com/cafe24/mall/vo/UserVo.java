@@ -1,5 +1,6 @@
 package com.cafe24.mall.vo;
 
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
@@ -86,6 +87,7 @@ public class UserVo {
         this.userJoinDate = userJoinDate;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -121,6 +123,7 @@ public class UserVo {
     @Override
     public int hashCode() {
         return Objects.hash(userNumber, userName, userId, userPassword, userJoinDate, userGender, userTall, userBirth, userPostNumber, userAddr, userPhone);
+
     }
 
     public UserGender getUserGender() {

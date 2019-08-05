@@ -5,6 +5,7 @@ import com.cafe24.mall.vo.UserVo;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+
 import java.util.List;
 
 @Repository
@@ -17,12 +18,15 @@ public class UserDao {
     }
 
     public Integer registry(UserVo userVo) {
+
         // TODO : exception processing
         try {
             return sqlSession.insert("user.registry", userVo);
         }
         catch (Exception e){
+
             e.printStackTrace();
+
             return 0;
         }
     }
@@ -33,6 +37,7 @@ public class UserDao {
     }
 
     public List<UserVo> getList(int page){
+
         try {
             return sqlSession.selectList("user.getList", (page - 1) * 15);
         }
@@ -40,6 +45,7 @@ public class UserDao {
             e.printStackTrace();
             return null;
         }
+
     }
 
     public UserVo getByUserNumber(Long userNum){

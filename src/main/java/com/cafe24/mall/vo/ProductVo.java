@@ -1,5 +1,6 @@
 package com.cafe24.mall.vo;
 
+
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,4 +90,5 @@ public class ProductVo {
     public int hashCode() {
         return Objects.hash(productNumber, productName, productTitle, productStockType);
     }
+
 }
