@@ -5,15 +5,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class TestController {
+public class MainController {
 
     @GetMapping("")
-    public String testPage(){
-        return "test";
+    public String mainPage(){
+        return "main/index";
     }
 
-    @GetMapping("/1")
+    @GetMapping("/test")
     public String testPage2(){
-        return "test2";
+        return "main/test";
     }
 }
