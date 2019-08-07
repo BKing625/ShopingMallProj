@@ -67,4 +67,19 @@ public class OptionVo {
     public void setParentOptionNumber(Long parentOptionNumber) {
         this.parentOptionNumber = parentOptionNumber;
     }
+
+    public OptionVo getCopy(){
+
+        OptionVo copiedVo = new OptionVo();
+        copiedVo.setOptionDetail(this.optionDetail);
+        copiedVo.setOptionNumber(this.optionNumber);
+        copiedVo.setParentOptionNumber(this.parentOptionNumber);
+        copiedVo.setProductNumber(this.productNumber);
+
+        if(this.getSubOptions()==null) return  copiedVo;
+        for (int i = 0; i<this.getSubOptions().size();i++){
+            copiedVo.addChildren(this.getSubOptions().get(i).getCopy());
+        }
+        return copiedVo;
+    }
 }
