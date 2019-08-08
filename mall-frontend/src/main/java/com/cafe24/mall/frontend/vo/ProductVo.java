@@ -73,9 +73,11 @@ public class ProductVo {
     @Override
     public String toString() {
         return "ProductVo{" +
-                "productNumber=" + productNumber +
+                "options=" + options +
+                ", productNumber=" + productNumber +
                 ", productName='" + productName + '\'' +
                 ", productTitle='" + productTitle + '\'' +
+                ", productPrice=" + productPrice +
                 ", productStockType=" + productStockType +
                 '}';
     }
