@@ -3,9 +3,14 @@ package com.cafe24.mall.frontend.service;
 import com.cafe24.mall.frontend.dto.ProductDto;
 import com.cafe24.mall.frontend.vo.OptionVo;
 import com.cafe24.mall.frontend.vo.ProductVo;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+import okhttp3.*;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,10 +20,62 @@ import java.util.Map;
 public class ProductService {
 
 
+    public List<ProductVo> getList(Integer page){
+        try {
 
-    public void add(ProductDto productDto){
-        makeVo(productDto);
+            Request request = new Request.Builder()
+                    .url("http://localhost:8081/product//list/"+page.toString())
+                    .addHeader("content-type", "application/json")
+                    .get()
+                    .build();
+            OkHttpClient client = new OkHttpClient();
+            Response response = client.newCall(request).execute();
+
+            if(!response.isSuccessful())
+                return null;
+
+            String resStr = new Gson().fromJson(response.body().string(),JsonObject.class).get("data").toString();
+            Type typeToken = new TypeToken<ArrayList<ProductVo>>(){}.getType();
+            //System.out.println(resStr);
+
+            List<ProductVo> res = new Gson().fromJson(resStr,typeToken);
+
+//            for (ProductVo vo : res){
+//                System.out.println(vo);
+//            }
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
+    public Boolean add(ProductDto productDto){
+
+        ProductVo addVo = makeVo(productDto);
+        try {
+
+            MediaType mediaType = MediaType.parse("application/json");
+            RequestBody body = RequestBody.create(mediaType, new Gson().toJson(addVo));
+
+            Request request = new Request.Builder()
+                    .url("http://localhost:8081/product")
+                    .addHeader("content-type", "application/json")
+                    .post(body)
+                    .build();
+            OkHttpClient client = new OkHttpClient();
+            Response response = client.newCall(request).execute();
+
+            return response.isSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
+
+
 
 
     private ProductVo makeVo(ProductDto productDto){

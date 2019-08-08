@@ -26,7 +26,7 @@ public class UserController {
     public String userJoin(@ModelAttribute UserVo userVo, Model model){
         System.out.println(userVo);
         Boolean res = userService.join(userVo);
-        
+
         model.addAttribute("result", res);
         model.addAttribute("message", res?"가입을 환영합니다":"가입 실패하였어요 ㅠㅠ");
         return "user/joinResult";

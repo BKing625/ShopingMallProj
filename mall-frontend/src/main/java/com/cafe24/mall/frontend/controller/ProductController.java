@@ -25,7 +25,7 @@ public class ProductController {
 
     @PostMapping("/add")
     public String addProduct(@ModelAttribute ProductDto productBuffer){
-        System.out.println(productBuffer);
+        //System.out.println(productBuffer);
         productService.add(productBuffer);
         return "product/addForm";
     }

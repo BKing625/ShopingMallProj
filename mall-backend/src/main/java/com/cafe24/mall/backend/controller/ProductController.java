@@ -3,6 +3,7 @@ package com.cafe24.mall.backend.controller;
 import com.cafe24.dto.JsonResult;
 import com.cafe24.mall.backend.service.ProductService;
 import com.cafe24.mall.backend.vo.ProductVo;
+import com.oracle.tools.packager.Log;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -46,6 +47,7 @@ public class ProductController {
                         .body(JsonResult.fail(error.getDefaultMessage()));
             }
         }
+        Log.debug(pVo.toString());
 
         ResponseEntity res;
 
