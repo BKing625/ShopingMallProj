@@ -147,6 +147,8 @@ public class UserVo {
     }
 
     public void setUserBirth(String userBirth) {
+        if("".equals(userBirth))
+            return;
         this.userBirth = userBirth;
     }
 

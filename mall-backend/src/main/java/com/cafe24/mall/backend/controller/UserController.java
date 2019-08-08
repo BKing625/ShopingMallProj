@@ -81,13 +81,15 @@ public class UserController {
                         .body(JsonResult.fail(error.getDefaultMessage()));
             }
         }
-
+        System.out.println(userVo);
         ResponseEntity<JsonResult> res;
 
         if(userService.add(userVo))
             res = ResponseEntity.status(HttpStatus.CREATED).body(JsonResult.success(null));
+
         else
             res = ResponseEntity.status(500).body(JsonResult.fail("add fail"));
+
         return res;
     }
 
