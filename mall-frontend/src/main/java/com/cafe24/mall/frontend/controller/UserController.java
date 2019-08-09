@@ -5,10 +5,9 @@ import com.cafe24.mall.frontend.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -36,5 +35,24 @@ public class UserController {
     public String userLoginForm(){
 
         return "user/login";
+    }
+
+    @GetMapping("/list/{userPage:[\\d]+}")
+    public String userList(@PathVariable Integer userPage, Model model){
+
+        List<UserVo> userList = userService.getList(userPage);
+
+//        for(UserVo uv:userList){
+//            System.out.println(uv);
+//        }
+        model.addAttribute("userList",userList);
+        return "user/list";
+    }
+
+    @GetMapping("/list")
+    public String userPageGetter(){
+
+
+        return "redirect:/user/list/1";
     }
 }

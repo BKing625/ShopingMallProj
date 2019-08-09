@@ -13,7 +13,8 @@
         <a href="${pageContext.servletContext.contextPath }/" class="list-group-item">상품</a>
         <a href="${pageContext.servletContext.contextPath }/basket" class="list-group-item">장바구니</a>
         <c:if test='${"ROLE_ADMIN" == userRole}'>
-        <a href="${pageContext.servletContext.contextPath }/product/add" class="list-group-item">상품추가</a>
+            <a href="${pageContext.servletContext.contextPath }/product/add" class="list-group-item">상품추가</a>
+            <a href="${pageContext.servletContext.contextPath }/user/list" class="list-group-item">유저정보</a>
         </c:if>
     </div>
 </div>
