@@ -31,4 +31,10 @@ public class UserController {
         model.addAttribute("message", res?"가입을 환영합니다":"가입 실패하였어요 ㅠㅠ");
         return "user/joinResult";
     }
+
+    @GetMapping("/login")
+    public String userLoginForm(){
+
+        return "user/login";
+    }
 }
