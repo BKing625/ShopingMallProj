@@ -9,7 +9,6 @@ import com.google.gson.reflect.TypeToken;
 import okhttp3.*;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +23,7 @@ public class ProductService {
         try {
 
             Request request = new Request.Builder()
-                    .url("http://localhost:8081/product//list/"+page.toString())
+                    .url("http://localhost:8081/product/list/"+page.toString())
                     .addHeader("content-type", "application/json")
                     .get()
                     .build();
@@ -72,7 +71,35 @@ public class ProductService {
         }
     }
 
+    public ProductVo get(Long productNumber) {
+        try {
 
+            Request request = new Request.Builder()
+                    .url("http://localhost:8081/product/"+productNumber.toString())
+                    .addHeader("content-type", "application/json")
+                    .get()
+                    .build();
+
+            OkHttpClient client = new OkHttpClient();
+            Response response = client.newCall(request).execute();
+
+            if(!response.isSuccessful())
+                return null;
+
+            String resStr = new Gson().fromJson(response.body().string(),JsonObject.class).get("data").toString();
+            Type typeToken = new TypeToken<ProductVo>(){}.getType();
+            //System.out.println(resStr);
+
+            ProductVo res = new Gson().fromJson(resStr,typeToken);
+            //System.out.println(res);
+
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 
 
 
