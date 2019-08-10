@@ -125,12 +125,12 @@
 
         <div class="col-lg-9">
             <div class="card h-100">
-                <a href="${pageContext.servletContext.contextPath }/product/${vo.productNumber}"><img
+                <a href="${pageContext.servletContext.contextPath }/product/${productVo.productNumber}"><img
                         class="card-img-top"
-                        src="http://placehold.it/700x400" alt=""></a>
+                        src="${pageContext.servletContext.contextPath }/images/${productVo.productNumber}" alt=""></a>
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a href="${pageContext.servletContext.contextPath }/product/${vo.productNumber}">${productVo.productName}</a>
+                        <a href="${pageContext.servletContext.contextPath }/product/${productVo.productNumber}">${productVo.productName}</a>
                     </h4>
                     <h5>&#8361; ${productVo.productPrice}</h5>
                     <p class="card-text">${productVo.productTitle}</p>

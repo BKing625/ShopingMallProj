@@ -52,7 +52,7 @@ public class ProductController {
         ResponseEntity res;
 
         if(productService.add(pVo))
-            res = ResponseEntity.status(HttpStatus.CREATED).body(JsonResult.success(null));
+            res = ResponseEntity.status(HttpStatus.CREATED).body(JsonResult.success(pVo.getProductNumber()));
         else
             res = ResponseEntity.status(500).body(JsonResult.fail("add fail"));
         return res;

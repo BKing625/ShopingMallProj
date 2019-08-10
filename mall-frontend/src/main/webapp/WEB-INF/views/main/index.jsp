@@ -38,16 +38,16 @@
 					</ol>
 					<div class="carousel-inner" role="listbox">
 						<div class="carousel-item active">
-							<img class="d-block img-fluid" src="http://placehold.it/900x350"
-								alt="First slide">
+							<img class="d-block img-fluid" src="${pageContext.servletContext.contextPath }/images/${productList[0].productNumber}"
+								 style=" height: 350px; width: 850px; object-fit: contain" alt="First slide">
 						</div>
 						<div class="carousel-item">
-							<img class="d-block img-fluid" src="http://placehold.it/900x350"
-								alt="Second slide">
+							<img class="d-block img-fluid" src="${pageContext.servletContext.contextPath }/images/${productList[1].productNumber}"
+								 style=" height: 350px; width: 850px; object-fit: contain"alt="Second slide">
 						</div>
 						<div class="carousel-item">
-							<img class="d-block img-fluid" src="http://placehold.it/900x350"
-								alt="Third slide">
+							<img class="d-block img-fluid" src="${pageContext.servletContext.contextPath }/images/${productList[2].productNumber}"
+								 style=" height: 350px; width: 850px; object-fit: contain" alt="Third slide">
 						</div>
 					</div>
 					<a class="carousel-control-prev" href="#carouselExampleIndicators"
@@ -67,7 +67,7 @@
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
 								<a href="${pageContext.servletContext.contextPath }/product/${vo.productNumber}"><img class="card-img-top"
-												 src="http://placehold.it/700x400" alt=""></a>
+												 src="${pageContext.servletContext.contextPath }/images/${vo.productNumber}" alt=""></a>
 								<div class="card-body">
 									<h4 class="card-title">
 										<a href="${pageContext.servletContext.contextPath }/product/${vo.productNumber}">${vo.productName}</a>

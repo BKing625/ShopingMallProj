@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
@@ -38,5 +39,10 @@ public class WebConfig implements WebMvcConfigurer {
 //                .excludePathPatterns("/user/auth")
 //                .excludePathPatterns("/user/logout")
 //                .excludePathPatterns("/assets/**");
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/images/**").addResourceLocations("file:/Users/bking/Workspace/mallproject/mall-frontend/src/main/webapp/WEB-INF/ImageFiles/");
     }
 }

@@ -28,7 +28,9 @@ public class ProductController {
     @PostMapping("/add")
     public String addProduct(@ModelAttribute ProductDto productBuffer){
         //System.out.println(productBuffer);
-        productService.add(productBuffer);
+        Integer resNum =productService.add(productBuffer);
+        if(resNum>0)
+            return "redirect:/product/"+resNum.toString();
         return "product/addForm";
     }
 

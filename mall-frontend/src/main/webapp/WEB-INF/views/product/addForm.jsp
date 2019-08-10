@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,7 +20,6 @@
             float: left;
         }
     </style>
-
     <script type="text/javascript">
         var count = 0;
         var detailCount = [0, 0, 0, 0];
@@ -72,7 +71,7 @@
             var addedDiv = document.createElement("div"); // 폼 생성
 
             addedDiv.id = "option_" + optionNum + "_" + detailCount[optionNum]; // 폼 Div에 ID 부여 (삭제를 위해)
-            addedDiv.innerHTML = "<input name = 'optionDetail_" + optionNum + "["+detailCount[optionNum]+"]' type='text'>";
+            addedDiv.innerHTML = "<input name = 'optionDetail_" + optionNum + "[" + detailCount[optionNum] + "]' type='text'>";
 
             addedFormDiv.appendChild(addedDiv); // 삽입할 DIV에 생성한 폼 삽입
 
@@ -92,8 +91,30 @@
             addedFormDiv.removeChild(addedDiv); // 폼 삭제
         }
 
-
     </script>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $("#imgInp").on('change', function(){
+                readURL(this);
+            });
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imageView').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+
 </head>
 <body onload="addSubOption()">
 <!-- Navigation -->
@@ -105,8 +126,9 @@
 <div class="container">
 
     <!-- 파일을 전송하기 위한 enctype -->
-<%--    enctype="multipart/form-data"--%>
-    <form name="productForm" action="${pageContext.servletContext.contextPath}/product/add" method="post" >
+    <%--    enctype="multipart/form-data"--%>
+    <form name="productForm" action="${pageContext.servletContext.contextPath}/product/add" method="post"
+          enctype="multipart/form-data">
         <input type="hidden" name="option_cnt" value="0">
         <table style="width: 80%">
 
@@ -157,9 +179,14 @@
 
                 <td>
 
-                    <img name="preview" src="../images/product/noimage.jpg" style="width:100%"><br/>
+                    <img id="imageView" src="../images/product/noimage.jpg" style="max-width: 30%; height: auto;"
+                         alt="상품이미지" ><br/>
 
-                    <input type="file" name="image" size="30" onchange="filePreview()">
+<%--                    <input id="imgInput" type="file" name="imgInput" size="30" onchange="fileChanged()">--%>
+
+                    <input type='file' id="imgInp" name="imgInput"  size="30" />
+
+<%--                    <img id="blah" src="#" alt="your image" />--%>
 
                 </td>
 

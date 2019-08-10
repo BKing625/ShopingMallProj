@@ -1,5 +1,7 @@
 package com.cafe24.mall.frontend.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 public class ProductDto {
@@ -8,6 +10,16 @@ public class ProductDto {
     private String detail;
     private Integer price;
     private Integer option_cnt;
+    private MultipartFile imgInput;
+
+    public MultipartFile getImgInput() {
+        return imgInput;
+    }
+
+    public void setImgInput(MultipartFile imgInput) {
+        this.imgInput = imgInput;
+    }
+
     private List<String> optionDetail_0;
     private List<String>  optionDetail_1;
     private List<String>  optionDetail_2;
