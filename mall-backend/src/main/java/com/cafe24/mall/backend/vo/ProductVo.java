@@ -28,6 +28,15 @@ public class ProductVo {
 
     // TODO: 2019-07-27 add validator 
     private StockType productStockType;
+    private Integer productPrice;
+
+    public Integer getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(Integer productPrice) {
+        this.productPrice = productPrice;
+    }
 
     public Long getProductNumber() {
         return productNumber;
@@ -64,9 +73,11 @@ public class ProductVo {
     @Override
     public String toString() {
         return "ProductVo{" +
-                "productNumber=" + productNumber +
+                "options=" + options +
+                ", productNumber=" + productNumber +
                 ", productName='" + productName + '\'' +
                 ", productTitle='" + productTitle + '\'' +
+                ", productPrice=" + productPrice +
                 ", productStockType=" + productStockType +
                 '}';
     }

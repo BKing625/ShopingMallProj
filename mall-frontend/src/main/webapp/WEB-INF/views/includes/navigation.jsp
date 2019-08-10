@@ -14,10 +14,7 @@
 			<ul class="navbar-nav ml-auto">
 
 				<c:choose>
-					<c:when test='${param.active == "login" }'>
-						<li class="nav-item">
-							<a class="nav-link" href="${pageContext.servletContext.contextPath }">홈</a>
-						</li>
+					<c:when test='${empty userRole}'>
 						<li class="nav-item active">
 							<a class="nav-link" href="${pageContext.servletContext.contextPath }/user/login">로그인<span class="sr-only">(current)</span></a>
 						</li>
@@ -28,16 +25,11 @@
 							<a class="nav-link" href="${pageContext.servletContext.contextPath }/cs">고객센터</a>
 						</li>
 					</c:when>
-					<c:when test='${param.active == "join" }'>
+					<c:when test='${"ROLE_ADMIN" == userRole}'>
 						<li class="nav-item">
-							<a class="nav-link" href="${pageContext.servletContext.contextPath }">홈</a>
+							<a class="nav-link" href="${pageContext.servletContext.contextPath }/user/logout">로그아웃</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="${pageContext.servletContext.contextPath }/user/login">로그인</a>
-						</li>
-						<li class="nav-item active">
-							<a class="nav-link" href="${pageContext.servletContext.contextPath }/user/join">회원가입<span class="sr-only">(current)</span></a>
-						</li>
+
 						<li class="nav-item">
 							<a class="nav-link" href="${pageContext.servletContext.contextPath }/cs">고객센터</a>
 						</li>
