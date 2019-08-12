@@ -79,7 +79,9 @@
                 }
             });
 
-            if(!flag){ optionsDiv.removeChild(addSelTag)};
+            if(!flag){
+                optionsDiv.removeChild(addSelTag);
+            }
 
 
         }
@@ -127,7 +129,8 @@
             <div class="card h-100">
                 <a href="${pageContext.servletContext.contextPath }/product/${productVo.productNumber}"><img
                         class="card-img-top"
-                        src="${pageContext.servletContext.contextPath }/images/${productVo.productNumber}" alt=""></a>
+                        src="${pageContext.servletContext.contextPath }/images/${productVo.productNumber}"
+                        style=" height: 400px; width: 900px; object-fit: contain" alt=""></a>
                 <div class="card-body">
                     <h4 class="card-title">
                         <a href="${pageContext.servletContext.contextPath }/product/${productVo.productNumber}">${productVo.productName}</a>
