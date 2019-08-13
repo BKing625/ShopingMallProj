@@ -54,9 +54,16 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String signIn(){
+    public ResponseEntity signIn(@RequestBody UserVo loginUserVo){
         // TODO : move to security & implementation
-        return null;
+        UserVo resVo = userService.login(loginUserVo);
+        ResponseEntity res;
+        if(resVo != null)
+            res = ResponseEntity.status(HttpStatus.CREATED).body(JsonResult.success(resVo));
+        else
+            res = ResponseEntity.status(500).body(JsonResult.fail("add fail"));
+        return res;
+
     }
 
 

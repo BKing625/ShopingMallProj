@@ -26,7 +26,7 @@
     <h1 class="my-4">PJMall</h1>
     <div class="list-group">
         <a id = "menu_0" href="${pageContext.servletContext.contextPath }/" class="list-group-item"  onclick="menuStatusChange(0)">상품</a>
-        <a id = "menu_1" href="${pageContext.servletContext.contextPath }/basket" class="list-group-item" onclick="menuStatusChange(1)">장바구니</a>
+        <a id = "menu_1" href="${pageContext.servletContext.contextPath }/bucket" class="list-group-item" onclick="menuStatusChange(1)">장바구니</a>
         <c:if test='${"ROLE_ADMIN" == userRole}'>
             <a id = "menu_2" href="${pageContext.servletContext.contextPath }/product/add" class="list-group-item"  onclick="menuStatusChange(2)">상품추가</a>
             <a id = "menu_3" href="${pageContext.servletContext.contextPath }/user/list" class="list-group-item"  onclick="menuStatusChange(3)">유저정보</a>

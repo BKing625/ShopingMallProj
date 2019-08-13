@@ -21,7 +21,9 @@
 		<c:param name="active" value="login" />
 	</c:import>
 	<!-- /.Navigation -->
-
+	<c:if test='${"result"=="fail"}'>
+		<script>alert("로그인에 실패하였습니다.")</script>
+	</c:if>
  	<div class="container">
  		<div class="card card-container">
         	<img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />

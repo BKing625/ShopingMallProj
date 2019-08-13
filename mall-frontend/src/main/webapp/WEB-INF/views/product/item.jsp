@@ -45,6 +45,9 @@
                     delEl.remove();
             }
 
+            var delElForm =  document.getElementById('bucketForm');
+                 if(delElForm) delElForm.remove();
+
             var addSelTag = document.createElement("select");
             addSelTag.id = "option_layer_"+(opLayer+1);
             //addSelTag.onchange = "optionChanged("+(opLayer+1)+")";
@@ -81,6 +84,45 @@
 
             if(!flag){
                 optionsDiv.removeChild(addSelTag);
+
+                <c:if test='${not empty authUserInfo.userNumber}'>
+                if(selectedValue!=-1) {
+                    var form = document.createElement("form");
+                    form.id='bucketForm';
+                    form.action="${pageContext.servletContext.contextPath}/bucket";
+                    form.method="post";
+
+
+                    var amountInput = document.createElement("input");
+                    amountInput.id = 'amount_input';
+                    amountInput.value = 0;
+                    amountInput.name= 'bucketCount';
+                    form.appendChild(amountInput);
+                    //optionsDiv.appendChild(amountInput);
+                    var userNumHidden = document.createElement("input");
+                    userNumHidden.id='userNumHidden';
+                    userNumHidden.type="hidden";
+                    userNumHidden.name='userNumber';
+                    userNumHidden.value=${authUserInfo.userNumber};
+                    form.appendChild(userNumHidden);
+
+
+                    var bucketBtn = document.createElement("button");
+                    bucketBtn.id = 'bucket_btn';
+                    bucketBtn.value=selectedValue;
+                    bucketBtn.innerHTML = '장바구니 추가';
+                    bucketBtn.name='optionNumber';
+                    bucketBtn.addEventListener("click",function (ev) { console.log(typeof ev) });
+                    form.appendChild(bucketBtn);
+
+
+                    // bucketBtn.onclick(function () {
+                    //     console.log(this.value);
+                    // });
+
+                    //optionsDiv.appendChild(bucketBtn);
+                    optionsDiv.appendChild(form);
+                }</c:if>
             }
 
 
@@ -147,7 +189,6 @@
             </div>
         </div>
         <!-- /.col-lg-9 -->
-
     </div>
     <!-- /.row -->
 </div>

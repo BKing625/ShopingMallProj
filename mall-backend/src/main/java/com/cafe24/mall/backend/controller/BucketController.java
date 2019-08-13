@@ -21,13 +21,13 @@ public class BucketController {
         this.bucketService = bucketService;
     }
 
-    @GetMapping("")
-    public JsonResult getBucket(){
+    @GetMapping("/user/{userNo:[\\d]+}")
+    public JsonResult getBucket(@PathVariable Long userNo){
 
         BucketVo bucVo = new BucketVo();
 
         // TODO: 2019-08-04 user auth
-        bucVo.setUserNumber(1L);
+        bucVo.setUserNumber(userNo);
         return JsonResult.success(bucketService.getList(bucVo));
     }
 

@@ -64,4 +64,36 @@ public class UserService {
         }
     }
 
+    public UserVo login(String email, String password) {
+        UserVo loginVo = new UserVo();
+        loginVo.setUserId(email);
+        loginVo.setUserPassword(password);
+        try {
+            MediaType mediaType = MediaType.parse("application/json");
+            RequestBody body = RequestBody.create(mediaType, new Gson().toJson(loginVo));
+
+            Request request = new Request.Builder()
+                    .url("http://localhost:8081/users/login")
+                    .addHeader("content-type", "application/json")
+                    .post(body)
+                    .build();
+            OkHttpClient client = new OkHttpClient();
+            Response response = client.newCall(request).execute();
+
+            if (!response.isSuccessful())
+                return null;
+
+            String resStr = new Gson().fromJson(response.body().string(), JsonObject.class).get("data").toString();
+            Type typeToken = new TypeToken<UserVo>() {
+            }.getType();
+            //System.out.println(resStr);
+
+            UserVo res = new Gson().fromJson(resStr, typeToken);
+
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

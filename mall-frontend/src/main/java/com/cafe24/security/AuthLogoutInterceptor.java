@@ -12,6 +12,7 @@ public class AuthLogoutInterceptor extends HandlerInterceptorAdapter {
 
         HttpSession session = request.getSession();
         session.removeAttribute("userRole");
+        session.removeAttribute("authUserInfo");
         session.invalidate();
 
         response.sendRedirect("/");
