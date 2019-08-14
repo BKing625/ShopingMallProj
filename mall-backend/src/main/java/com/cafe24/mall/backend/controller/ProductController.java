@@ -106,4 +106,15 @@ public class ProductController {
         return res;
 
     }
+
+    @GetMapping("/option/{optionNo:[\\d]+}")
+    public JsonResult getProductViewType(@PathVariable Long optionNo){
+
+        ProductVo resVo = productService.getProductNumberByOption(optionNo);
+        if(resVo!=null){
+            return JsonResult.success(resVo);
+        } else {
+            return JsonResult.fail("invalid product number");
+        }
+    }
 }

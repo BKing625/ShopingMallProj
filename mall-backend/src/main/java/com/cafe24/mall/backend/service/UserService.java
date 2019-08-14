@@ -5,6 +5,7 @@ import com.cafe24.mall.backend.vo.UserVo;
 import com.cafe24.mall.backend.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -35,8 +36,12 @@ public class UserService {
 
     }
 
-    public UserVo login(UserVo userVo){
+    public UserVo login(UserVo userVo) {
+        if(!StringUtils.isEmpty(userVo.getUserId())&&
+        !StringUtils.isEmpty(userVo.getUserPassword()))
+            return userDao.get(userVo);
         return null;
+
     }
 
     public List<UserVo> getList(){
@@ -62,4 +67,5 @@ public class UserService {
         return userDao.getByUserId(userId) != null;
 
     }
+
 }

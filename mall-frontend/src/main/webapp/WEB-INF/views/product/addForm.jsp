@@ -95,8 +95,8 @@
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
     <script type="text/javascript">
-        $(function() {
-            $("#imgInp").on('change', function(){
+        $(function () {
+            $("#imgInp").on('change', function () {
                 readURL(this);
             });
         });
@@ -124,91 +124,94 @@
 <!-- /.Navigation -->
 
 <div class="container">
+    <div class="row">
+        <c:import url='/WEB-INF/views/includes/menubar.jsp'/>
+        <!-- 파일을 전송하기 위한 enctype -->
+        <%--    enctype="multipart/form-data"--%>
+        <div class="col-lg-9">
+            <form name="productForm" action="${pageContext.servletContext.contextPath}/product/add" method="post"
+                  enctype="multipart/form-data">
+                <input type="hidden" name="option_cnt" value="0">
+                <table style="width: 80%">
 
-    <!-- 파일을 전송하기 위한 enctype -->
-    <%--    enctype="multipart/form-data"--%>
-    <form name="productForm" action="${pageContext.servletContext.contextPath}/product/add" method="post"
-          enctype="multipart/form-data">
-        <input type="hidden" name="option_cnt" value="0">
-        <table style="width: 80%">
+                    <tr>
 
-            <tr>
+                        <th colspan="2">** 상품 등록 **</th>
 
-                <th colspan="2">** 상품 등록 **</th>
+                    </tr>
 
-            </tr>
+                    <tr>
 
-            <tr>
+                        <td style="width:20%">상품명</td>
 
-                <td style="width:20%">상품명</td>
+                        <td><input type="text" name="name"></td>
 
-                <td><input type="text" name="name"></td>
+                    </tr>
 
-            </tr>
+                    <tr>
 
-            <tr>
+                        <td>가격</td>
 
-                <td>가격</td>
+                        <td><input type="number" name="price"></td>
 
-                <td><input type="number" name="price"></td>
+                    </tr>
 
-            </tr>
+                    <tr>
 
-            <tr>
+                        <td>설 명</td>
 
-                <td>설 명</td>
+                        <td><textarea name="detail" rows="3" cols="30"></textarea></td>
 
-                <td><textarea name="detail" rows="3" cols="30"></textarea></td>
+                    </tr>
 
-            </tr>
+                    <tr>
 
-            <tr>
+                        <td>옵션</td>
 
-                <td>옵션</td>
+                        <td><input type="button" value="옵션추가" onclick="addSubOption()"><input type="button" value="옵션삭제"
+                                                                                              onclick="delSubOption()">
+                            <div id="options"></div>
+                        </td>
 
-                <td><input type="button" value="옵션추가" onclick="addSubOption()"><input type="button" value="옵션삭제"
-                                                                                      onclick="delSubOption()">
-                    <div id="options"></div>
-                </td>
+                    </tr>
 
-            </tr>
+                    <tr>
 
-            <tr>
+                        <td>이미지</td>
 
-                <td>이미지</td>
+                        <td>
 
-                <td>
+                            <img id="imageView" src="../images/product/noimage.jpg"
+                                 style="max-width: 30%; height: auto;"
+                                 alt="상품이미지"><br/>
 
-                    <img id="imageView" src="../images/product/noimage.jpg" style="max-width: 30%; height: auto;"
-                         alt="상품이미지" ><br/>
+                            <%--                    <input id="imgInput" type="file" name="imgInput" size="30" onchange="fileChanged()">--%>
 
-<%--                    <input id="imgInput" type="file" name="imgInput" size="30" onchange="fileChanged()">--%>
+                            <input type='file' id="imgInp" name="imgInput" size="30"/>
 
-                    <input type='file' id="imgInp" name="imgInput"  size="30" />
+                            <%--                    <img id="blah" src="#" alt="your image" />--%>
 
-<%--                    <img id="blah" src="#" alt="your image" />--%>
+                        </td>
 
-                </td>
+                    </tr>
 
-            </tr>
+                    <tr>
 
-            <tr>
+                        <td colspan="2">
 
-                <td colspan="2">
+                            <br/>
 
-                    <br/>
+                            <input type="submit" value="상품 등록">
 
-                    <input type="submit" value="상품 등록">
+                        </td>
 
-                </td>
+                    </tr>
 
-            </tr>
+                </table>
 
-        </table>
-
-    </form>
-
-
+            </form>
+        </div>
+    </div>
     <!-- /.card-container -->
 </div>
 <!-- /.container -->

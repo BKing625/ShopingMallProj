@@ -41,10 +41,10 @@ public class BucketDao {
         }
     }
 
-    public Integer delete(Long bucketNum){
-        if (bucketNum == null)
+    public Integer delete(BucketVo bucketVo){
+        if (bucketVo.getUserNumber() == null && bucketVo.getBucketNumber()==null)
             return 0;
-        return sqlSession.delete("bucket.delete", bucketNum);
+        return sqlSession.delete("bucket.delete", bucketVo);
     }
     public Integer update(BucketVo bucVo){
         return sqlSession.update("bucket.update",bucVo);

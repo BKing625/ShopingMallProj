@@ -1,7 +1,10 @@
 package com.cafe24.mall.frontend.service;
 
 import com.cafe24.mall.frontend.dto.ProductDto;
+import com.cafe24.mall.frontend.dto.ProductSimpleViewDto;
+import com.cafe24.mall.frontend.util.MallUtil;
 import com.cafe24.mall.frontend.vo.OptionVo;
+import com.cafe24.mall.frontend.vo.OrderDetailsVo;
 import com.cafe24.mall.frontend.vo.ProductVo;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -198,4 +201,44 @@ public class ProductService {
 
         return resVo;
     }
+
+    public List<ProductSimpleViewDto> getByOrderDetails(List<OrderDetailsVo> goodsList) {
+
+        List<ProductSimpleViewDto> resList = new ArrayList<>();
+        try {
+            for(OrderDetailsVo oVo : goodsList) {
+                Request request = new Request.Builder()
+                        .url("http://localhost:8081/product/option/" + oVo.getOptionNumber().toString())
+                        .addHeader("content-type", "application/json")
+                        .get()
+                        .build();
+
+                OkHttpClient client = new OkHttpClient();
+                Response response = client.newCall(request).execute();
+
+                if (!response.isSuccessful())
+                    return null;
+
+                String resStr = new Gson().fromJson(response.body().string(), JsonObject.class).get("data").toString();
+                Type typeToken = new TypeToken<ProductVo>() {
+                }.getType();
+
+                ProductVo resProduct = new Gson().fromJson(resStr, typeToken);
+
+                ProductSimpleViewDto dto = new ProductSimpleViewDto();
+                dto.setCount(oVo.getOrderDetailsCount());
+                dto.setOptionNumber(oVo.getOptionNumber());
+                dto.setOptionStr(MallUtil.optionStringMaker(resProduct.getOptions(),oVo.getOptionNumber()));
+                dto.setProductName(resProduct.getProductName());
+                dto.setProductPrice(resProduct.getProductPrice());
+                dto.setProductNumber(resProduct.getProductNumber());
+                resList.add(dto);
+            }
+            return resList;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

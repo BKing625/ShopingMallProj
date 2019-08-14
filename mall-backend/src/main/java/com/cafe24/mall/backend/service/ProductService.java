@@ -119,4 +119,8 @@ public class ProductService {
 
         return resVo;
     }
+
+    public ProductVo getProductNumberByOption(Long optionNo) {
+        return get(optionDao.getProductNumByOption(optionNo));
+    }
 }

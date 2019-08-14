@@ -17,21 +17,19 @@ public class OrderController {
     }
 
 
-    @GetMapping("/list/{orderPage:[\\d]+}")
-    public JsonResult getOrderList(@PathVariable Integer orderPage){
+    @GetMapping("/list/{userNumber:[\\d]+}/{orderPage:[\\d]+}")
+    public JsonResult getOrderList(@PathVariable Long userNumber, @PathVariable Integer orderPage){
         // add permission
-
-        Long userNumber = 1L; // TODO: 2019-08-01 future work
+        // TODO: 2019-08-01 future work
         // = getUserNumber : fail (500 or 403)
-
         return JsonResult.success(orderService.getList(userNumber, orderPage));
     }
 
-    @GetMapping("/{orderNumber:[\\d]+}")
-    public JsonResult getOrderDetail(@PathVariable Long orderNumber){
-        Long userNumber = 1L; // TODO: 2019-08-01 get usernum
+    @GetMapping("/{userNumber:[\\d]+}/{orderNumber:[\\d]+}")
+    public JsonResult getOrderDetail(@PathVariable Long userNumber, @PathVariable Long orderNumber){
 
         OrderVo resVo = orderService.get(orderNumber,userNumber);
+        //System.out.println(resVo);
         if(resVo!=null){
             return JsonResult.success(resVo);
         } else {
@@ -44,7 +42,7 @@ public class OrderController {
         //add validation
 
         if(orderService.add(addVo))
-            return ResponseEntity.status(200).body(JsonResult.success(addVo.getOrderNumber().toString()));
+            return ResponseEntity.status(200).body(JsonResult.success(addVo.getOrderNumber()));
         else
             return ResponseEntity.status(500).body(JsonResult.fail("add fail"));
     }

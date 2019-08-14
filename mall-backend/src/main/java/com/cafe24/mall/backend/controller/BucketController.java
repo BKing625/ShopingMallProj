@@ -21,13 +21,13 @@ public class BucketController {
         this.bucketService = bucketService;
     }
 
-    @GetMapping("")
-    public JsonResult getBucket(){
+    @GetMapping("/user/{userNo:[\\d]+}")
+    public JsonResult getBucket(@PathVariable Long userNo){
 
         BucketVo bucVo = new BucketVo();
 
         // TODO: 2019-08-04 user auth
-        bucVo.setUserNumber(1L);
+        bucVo.setUserNumber(userNo);
         return JsonResult.success(bucketService.getList(bucVo));
     }
 
@@ -55,6 +55,16 @@ public class BucketController {
     public ResponseEntity delete(@PathVariable Long bucketNo) {
         ResponseEntity res = null;
         if(bucketService.delete(bucketNo))
+            res = ResponseEntity.status(200).body(null);
+        else
+            res = ResponseEntity.status(500).body(null);
+        return res;
+    }
+
+    @DeleteMapping("user/{userNumber:[\\d]+}")
+    public ResponseEntity deleteUserBucket(@PathVariable Long userNumber) {
+        ResponseEntity res = null;
+        if(bucketService.deleteByUser(userNumber))
             res = ResponseEntity.status(200).body(null);
         else
             res = ResponseEntity.status(500).body(null);

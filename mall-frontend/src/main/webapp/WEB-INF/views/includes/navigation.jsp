@@ -12,7 +12,6 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-
 				<c:choose>
 					<c:when test='${empty userRole}'>
 						<li class="nav-item active">
@@ -25,7 +24,7 @@
 							<a class="nav-link" href="${pageContext.servletContext.contextPath }/cs">고객센터</a>
 						</li>
 					</c:when>
-					<c:when test='${"ROLE_ADMIN" == userRole}'>
+					<c:when test='${not empty userRole}'>
 						<li class="nav-item">
 							<a class="nav-link" href="${pageContext.servletContext.contextPath }/user/logout">로그아웃</a>
 						</li>
