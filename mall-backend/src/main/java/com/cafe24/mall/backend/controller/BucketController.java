@@ -61,6 +61,16 @@ public class BucketController {
         return res;
     }
 
+    @DeleteMapping("user/{userNumber:[\\d]+}")
+    public ResponseEntity deleteUserBucket(@PathVariable Long userNumber) {
+        ResponseEntity res = null;
+        if(bucketService.deleteByUser(userNumber))
+            res = ResponseEntity.status(200).body(null);
+        else
+            res = ResponseEntity.status(500).body(null);
+        return res;
+    }
+
     @PutMapping("")
     public ResponseEntity changeCount(@RequestBody @Valid BucketVo bVo,
                                       BindingResult result) {

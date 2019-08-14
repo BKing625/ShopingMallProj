@@ -30,20 +30,13 @@
 
 
         <div class="col-lg-9">
-            <form method="post" action="${pageContext.servletContext.contextPath}/order/pre">
-            <c:forEach items='${bucketList}' var='vo' varStatus='status'>
-                상품번호 <input readonly type = "text" name="productSimpleViewDtoList[${status.index}].productNumber" value="${vo.productNumber}"> ,
-                옵션 <input readonly type = "text" name="productSimpleViewDtoList[${status.index}].optionStr" value="${vo.optionStr}"> ,
-                수량 <input readonly type = "text" name = "productSimpleViewDtoList[${status.index}].count" value="${vo.count}">
-                가격 <input readonly type = "text" name = "productSimpleViewDtoList[${status.index}].productPrice" value="${vo.productPrice}">
-                <input readonly type = "hidden" name = "productSimpleViewDtoList[${status.index}].optionNumber" value="${vo.optionNumber}">
-               <a href = "${pageContext.servletContext.contextPath}/bucket/delete/${vo.bucketNumber}">삭제</a> <br> <br> <br>
-                <c:set var = 'priceSum' value = '${priceSum + (vo.productPrice*vo.count)}'/>
+            <c:forEach items='${orderList}' var='order' varStatus='status'>
+
+                 주문번호 : ${order.orderNumber} , 주문상태 : ${order.orderState}, 주문일 : ${order.orderDate}
+
+                <button onclick="location.href='${pageContext.servletContext.contextPath }/order/${order.orderNumber}'" >상세보기</button>
+                    <br><br>
             </c:forEach>
-                <c:if test="${not empty bucketList}">
-                <br> 가격 : ${priceSum} <input type="submit" value="주문">
-                </c:if>
-            </form>
         </div>
         <!-- /.col-lg-9 -->
 

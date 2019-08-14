@@ -32,4 +32,8 @@ public class OptionDao {
     public Integer delete(Long productId){
         return sqlSession.delete("option.delete", productId);
     }
+
+    public Long getProductNumByOption(Long optionNo) {
+        return sqlSession.selectOne("option.getByOptionNum", optionNo);
+    }
 }

@@ -24,7 +24,9 @@ public class BucketService {
     }
 
     public boolean delete(Long delNum){
-        return 1==bucketDao.delete(delNum);
+        BucketVo bucVo = new BucketVo();
+        bucVo.setBucketNumber(delNum);
+        return 1==bucketDao.delete(bucVo);
     }
 
     public List<BucketVo> getList(BucketVo bucVo){
@@ -38,4 +40,9 @@ public class BucketService {
         return  1== bucketDao.update(bucVo);
     }
 
+    public boolean deleteByUser(Long userNumber) {
+        BucketVo bucVo = new BucketVo();
+       bucVo.setUserNumber(userNumber);
+        return 0<bucketDao.delete(bucVo);
+    }
 }

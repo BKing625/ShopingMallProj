@@ -1,5 +1,6 @@
 package com.cafe24.mall.frontend.vo;
 
+import java.util.List;
 import java.util.Objects;
 
 public class OrderDetailsVo {
@@ -7,6 +8,16 @@ public class OrderDetailsVo {
     private Long orderNumber;
     private Long optionNumber;
     private Long orderDetailsCount;
+
+    private List<OrderDetailsVo> orderDetailsVoList;
+
+    public List<OrderDetailsVo> getOrderDetailsVoList() {
+        return orderDetailsVoList;
+    }
+
+    public void setOrderDetailsVoList(List<OrderDetailsVo> orderDetailsVoList) {
+        this.orderDetailsVoList = orderDetailsVoList;
+    }
 
     @Override
     public boolean equals(Object o) {
